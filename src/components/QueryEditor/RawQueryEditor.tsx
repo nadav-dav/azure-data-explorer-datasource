@@ -2,10 +2,10 @@ import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { getTemplateSrv, reportInteraction } from '@grafana/runtime';
 import { CodeEditor, Monaco, MonacoEditor } from '@grafana/ui';
 import { AdxDataSource } from 'datasource';
+import { cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { selectors } from 'test/selectors';
 import { AdxDataSourceOptions, AdxSchema, KustoQuery } from 'types';
-import { cloneDeep } from 'lodash';
 
 import { getFunctions, getSignatureHelp } from './Suggestions';
 
@@ -85,7 +85,7 @@ export const RawQueryEditor: React.FC<RawQueryEditorProps> = (props) => {
   };
 
   useEffect(() => {
-    if (worker && stateSchema) {
+    if (worker && stateSchema && stateSchema.Databases) {
       // Populate Database schema with macros
       Object.keys(stateSchema.Databases).forEach((db) =>
         Object.assign(stateSchema.Databases[db].Functions, getFunctions(variables))

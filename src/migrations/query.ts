@@ -1,4 +1,4 @@
-import { AdxQueryType, KustoQuery, defaultQuery, EditorMode } from 'types';
+import { AdxQueryType, defaultQuery, EditorMode, KustoQuery } from 'types';
 import { looksLikeV2, migrateExpression } from './expression';
 
 export const migrateQuery = (query: KustoQuery | string): KustoQuery => {
