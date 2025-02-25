@@ -3,7 +3,9 @@
   "version": "5.1.0",
   "description": "Grafana data source for Azure Data Explorer",
   "scripts": {
-    "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
+    "build": "yarn run build:frontend && yarn run build:backend",
+    "build:frontend": "webpack -c ./.config/webpack/webpack.config.ts --env production",
+    "build:backend": "mage -v build:linux",
     "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
     "e2e:playwright": "yarn playwright test",
     "e2e:playwright:ui": "yarn playwright test --ui",
@@ -13,6 +15,7 @@
     "server": "docker compose up --build",
     "sign": "npx --yes @grafana/sign-plugin@latest",
     "test": "jest --watch --onlyChanged",
+    "test:backend": "go test ./pkg/...",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "test:coverage": "jest --coverage",
     "test:coverage:changes": "jest --coverage --changedSince=origin/main",
